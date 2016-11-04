@@ -1,7 +1,10 @@
 # Solartrace
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+An open community project that utilizes crowd sourcing to trace areas that a business could
+install solar panels on. Using local utility sale prices of electricity and estimated Kwh 
+production we then figure out an estimate on how much money those traced areas could be
+making for their owners. All of these numbers are transparent and easily accessible to 
+facilitate the public presentation of these estimates to the companies. 
 
 ## Prerequisites
 
