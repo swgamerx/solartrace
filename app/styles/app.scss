@@ -7,7 +7,7 @@ Notes: All styles should attempt to follow the BEM methodology for a degree of
 consistancy
 */
 
-@import 'globals';
-@import 'layout';
-@import 'modules';
-@import 'themes';
+@import 'globals.scss';
+@import 'layouts.scss';
+@import 'modules.scss';
+@import 'themes.scss';

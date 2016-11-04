@@ -4,10 +4,10 @@ Description: Styles that are used across the whole site
 */
 
 // Basic CSS reset
-@import 'globals/reset';
+@import 'globals/reset.scss';
 
 // Global Variables
-@import 'globals/variables';
+@import 'globals/variables.scss';
 
 // Grid
-@import 'globals/grid';
+@import 'globals/grid.scss';
