@@ -56,3 +56,9 @@ jspm_packages
 /libpeerconnection.log
 npm-debug.log
 testem.log
+
+buildpack/mruby/
+buildpack/spec/examples.txt
+buildpack/.bundle
+buildpack/vendor/bundle
+buildpack/spec/fixtures
