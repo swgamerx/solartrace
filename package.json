@@ -43,6 +43,7 @@
     "ember-resolver": "^2.0.3",
     "ember-welcome-page": "^1.0.3",
     "emberfire": "2.0.4",
-    "loader.js": "^4.0.10"
+    "loader.js": "^4.0.10",
+    "watchman": "0.1.8"
   }
 }
