@@ -1,0 +1,13 @@
+/*
+Title: Global Styles
+Description: Styles that are used across the whole site
+*/
+
+// Basic CSS reset
+@import 'globals/reset';
+
+// Global Variables
+@import 'globals/variables';
+
+// Grid
+@import 'globals/grid';
