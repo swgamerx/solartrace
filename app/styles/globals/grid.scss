@@ -2,3 +2,5 @@
 Title: Grid
 Description: Basic grid layout.
 */
+
+.container { max-width: $grid-max-width; margin: 0 auto; }
