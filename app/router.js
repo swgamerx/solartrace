@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   // User Registration
   this.route('register');
 
@@ -22,6 +21,7 @@ Router.map(function() {
 
   // Add a trace, includes finding a business location to add the trace to
   this.route('trace');
+  this.route('about');
 });
 
 export default Router;
