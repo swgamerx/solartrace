@@ -2,6 +2,12 @@
 
 module.exports = function(environment) {
   var ENV = {
+    firebase: {
+      apiKey: 'AIzaSyBW0ksBWRxOyF5Mqp_OA4S-69JS92dg_Pw',
+      authDomain: 'solartrace-51fa4.firebaseapp.com',
+      databaseURL: 'https://solartrace-51fa4.firebaseio.com',
+      storageBucket: 'solartrace-51fa4.appspot.com',
+    },
     modulePrefix: 'solartrace',
     environment: environment,
     rootURL: '/',
