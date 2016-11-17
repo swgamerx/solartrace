@@ -17,7 +17,9 @@ Router.map(function() {
   this.route('companies');
 
   // View for a specific company and all of it's traces
-  this.route('company');
+  this.route('company', function() {
+    this.route('add');
+  });
 
   // Add a trace, includes finding a business location to add the trace to
   this.route('trace');

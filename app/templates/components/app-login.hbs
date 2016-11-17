@@ -1,0 +1,18 @@
+<form class="login">
+    <div class="input-group">
+        <label>Email</label>
+        {{input type='text' value=email}}
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        {{input type='password' value=password}}
+    </div>
+    {{#if session.isWorking}}
+        logging in
+    {{else}}
+    <button class='btn' {{action 'login' 'password'}}>
+        Login
+    </button>
+    {{/if}}  
+
+</form>
