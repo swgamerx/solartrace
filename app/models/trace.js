@@ -6,5 +6,8 @@ export default DS.Model.extend({
     pins: DS.hasMany('pin'),
     type: DS.belongsTo('type'),
     createdDate: DS.attr('date'),
-    updatedDate: DS.attr('date')
+    updatedDate: DS.attr('date'),
+    active: DS.attr('boolean'),
+    deactivedBy: DS.belongsTo('user'),
+    deactivatedDate: DS.attr('date')
 });
