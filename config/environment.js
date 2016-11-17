@@ -8,6 +8,8 @@ module.exports = function(environment) {
       databaseURL: 'https://solartrace-51fa4.firebaseio.com',
       storageBucket: 'solartrace-51fa4.appspot.com',
     },
+    torii: { sessionServiceName: 'session' },
+    googleLeaflet: { apiKey: 'AIzaSyCbWerkNiVcreviWE9fKSP-PQaSFw-tWY4'},
     modulePrefix: 'solartrace',
     environment: environment,
     rootURL: '/',
