@@ -1,1 +1,27 @@
-{{outlet}}
+{{! Attribute Business Description: Drop down of available companies with address text fields below. Allows user to select
+a business then add it's address. }}
+<div>
+    <select>
+        {{#each model.companies as |company|}}
+            <option value={{company.id}}>{{company.name}}</option>
+        {{/each}}
+    </select>
+    <div class="input-group">
+        <label>Address</label> {{input value=address type="text"}}
+    </div>
+    <div class="input-group">
+        <label>City</label> {{input value=city type="text"}}
+    </div>
+    <div>
+        <label>State</label> {{input value=state type="text"}}
+    </div>
+</div>
+{{! Rooftop or Parking Lot Select Description: Two options that are toggled to determine if the parking lot or the roof is
+being traced by the user. }}
+<div></div>
+{{! 
+Leaflet Map Description: Map with google maps hybrid layer. User can click on the map to add points to create a polygon.
+}} 
+{{#leaflet-map lat=36.174465 lng=-86.767960 zoom=12}} 
+    {{google-tile-layer type="HYBRID" opacity=0.9}} 
+{{/leaflet-map}}
