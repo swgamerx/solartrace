@@ -15,6 +15,7 @@ a business then add it's address. }}
     <div>
         <label>State</label> {{input value=state type="text"}}
     </div>
+    <div class="btn" {{action "findAddress" on="click"}}>Go There</div>
 </div>
 {{! Rooftop or Parking Lot Select Description: Two options that are toggled to determine if the parking lot or the roof is
 being traced by the user. }}
@@ -22,6 +23,6 @@ being traced by the user. }}
 {{! 
 Leaflet Map Description: Map with google maps hybrid layer. User can click on the map to add points to create a polygon.
 }} 
-{{#leaflet-map lat=36.174465 lng=-86.767960 zoom=12}} 
+{{#leaflet-map lat=lat lng=lng zoom=zoom}} 
     {{google-tile-layer type="HYBRID" opacity=0.9}} 
 {{/leaflet-map}}
