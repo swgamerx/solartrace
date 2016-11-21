@@ -9,5 +9,6 @@ export default DS.Model.extend({
     updatedDate: DS.attr('date'),
     active: DS.attr('boolean'),
     deactivedBy: DS.belongsTo('user'),
-    deactivatedDate: DS.attr('date')
+    deactivatedDate: DS.attr('date'),
+    squareMeters: DS.attr('number')
 });
