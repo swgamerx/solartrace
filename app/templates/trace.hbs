@@ -23,6 +23,12 @@ being traced by the user. }}
 {{! 
 Leaflet Map Description: Map with google maps hybrid layer. User can click on the map to add points to create a polygon.
 }} 
-{{#leaflet-map lat=lat lng=lng zoom=zoom}} 
+{{#leaflet-map lat=lat lng=lng zoom=zoom onClick=(action 'addPoint')}} 
     {{google-tile-layer type="HYBRID" opacity=0.9}} 
+    {{#each groundPoints as |r|}}
+        {{#marker-layer lat=r.lat lng=r.lng draggable=true onDragend=(action "updateLocation" r)}}
+        {{/marker-layer}}
+    {{/each}}
+    {{#polygon-layer locations=groundZone color="green"}}
+    {{/polygon-layer}}
 {{/leaflet-map}}
