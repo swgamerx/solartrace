@@ -1,0 +1,13 @@
+form,
+.form {}
+
+label, 
+.label {}
+
+input,
+.input { font-size: $font-size-default; padding: 5px; border: 2px solid $color-black; }
+
+select,
+.select {}
+
+.input-group { margin: 0 0 10px 0; }
