@@ -67,14 +67,20 @@ export default Ember.Controller.extend({
                 latitude: groundPoint.lat,
                 longitude: groundPoint.lng
             }));
-
+            let positions = [];
+            let groundPoints = this.get('groundPoints');
+            for(let i = 0; i < groundPoints.length; i++){
+                positions.push(new google.maps.LatLng(groundPoints[i].lat,groundPoints[i].lng));
+            }
+            let squareMeters = google.maps.geometry.spherical.computeArea(positions);
             RSVP.all(pins.invoke('save')).then((pins) => {
                 let trace = this.store.createRecord('trace', {
                     company: this.get('company'),
                     address: address, 
                     createdDate: new Date(),
                     active: 1,
-                    pins: pins
+                    pins: pins,
+                    squareMeters: squareMeters
                 });
                 trace.save();
                 address.save();
