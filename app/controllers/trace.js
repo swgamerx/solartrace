@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 export default Ember.Controller.extend({
     lat: 36.174465,
@@ -20,6 +21,7 @@ export default Ember.Controller.extend({
             $.ajax('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false').done(function(data){
                 console.log(data.results[0]);
                 controller.set('googleMapAddress', data.results[0]);
+                console.log(controller.get('googleMapAddress'));
                 controller.set('lat',data.results[0].geometry.location.lat);
                 controller.set('lng',data.results[0].geometry.location.lng);
                 controller.set('zoom',15);
@@ -44,24 +46,39 @@ export default Ember.Controller.extend({
             });
         },
         // Save a trace with all it's points and apply it to the business and address
-        submitTrace(){
-            let address = Ember.store.createRecord('address', {
+        saveTrace(){
+            let location = this.get('googleMapAddress');
+            let address = this.store.createRecord('address', {
                 company: this.get('company'),
-                address1: this.get(googleMapAddress.address_components[0].long_name) + ' ' + this.get(googleMapAddress.address_components[1].long_name),
+                address1: location.address_components[0].long_name + ' ' + location.address_components[1].long_name,
                 address2: '',
-                city: this.get(googleMapAddress.address_components[3].long_name),
-                state: this.get(googleMapAddress.address_components[5].short_name),
-                zipcode: this.get(googleMapAddress.address_components[7].long_name),
-                longitude: this.get(googleMapAddress.geometry.location.lng),
-                latitude: this.get(googleMapAddress.geometry.location.lat),
+                city: location.address_components[3].long_name,
+                state: location.address_components[5].short_name,
+                zipcode: location.address_components[7].long_name,
+                longitude: location.geometry.location.lng,
+                latitude: location.geometry.location.lat,
                 addedDate: new Date()
             });
-            let trace = Ember.store.createRecord('trace', {
-                company: this.get('company'),
-                address: address, 
-                createdDate: new Date(),
-                active: 1
+            
+
+            let pins = this
+            .get('groundPoints')
+            .map(groundPoint => this.store.createRecord('pin', {
+                latitude: groundPoint.lat,
+                longitude: groundPoint.lng
+            }));
+
+            RSVP.all(pins.invoke('save')).then((pins) => {
+                let trace = this.store.createRecord('trace', {
+                    company: this.get('company'),
+                    address: address, 
+                    createdDate: new Date(),
+                    active: 1,
+                    pins: pins
+                });
+                trace.save();
+                address.save();
             });
         }
-    }
+    }// end actions 
 });
