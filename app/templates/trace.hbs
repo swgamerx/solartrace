@@ -1,7 +1,7 @@
 {{! Attribute Business Description: Drop down of available companies with address text fields below. Allows user to select
 a business then add it's address. }}
 <div>
-    <select value=company>
+    <select name="company">
         {{#each model.companies as |company|}}
             <option value={{company.id}}>{{company.name}}</option>
         {{/each}}

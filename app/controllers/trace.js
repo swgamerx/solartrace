@@ -47,9 +47,10 @@ export default Ember.Controller.extend({
         },
         // Save a trace with all it's points and apply it to the business and address
         saveTrace(){
+            let company = this.store.peekRecord('company',$('select[name="company"]').val());
             let location = this.get('googleMapAddress');
             let address = this.store.createRecord('address', {
-                company: this.get('company'),
+                company: company,
                 address1: location.address_components[0].long_name + ' ' + location.address_components[1].long_name,
                 address2: '',
                 city: location.address_components[3].long_name,
@@ -75,7 +76,7 @@ export default Ember.Controller.extend({
             let squareMeters = google.maps.geometry.spherical.computeArea(positions);
             RSVP.all(pins.invoke('save')).then((pins) => {
                 let trace = this.store.createRecord('trace', {
-                    company: this.get('company'),
+                    company: company,
                     address: address, 
                     createdDate: new Date(),
                     active: 1,
