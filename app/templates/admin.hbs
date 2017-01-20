@@ -1,0 +1,11 @@
+<ul>
+    {{#each model.types as |type|}}
+        <li>{{type.name}}</li>
+    {{/each}}
+</ul>
+
+<form {{action "addType" on="submit"}}>
+    <label>type name:</label>
+    {{input value=type.name}}
+    <input type="submit" value="add"/>
+</form>
