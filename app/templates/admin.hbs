@@ -1,11 +1,30 @@
-<ul>
-    {{#each model.types as |type|}}
-        <li>{{type.name}}</li>
-    {{/each}}
-</ul>
+<div class="admin-block">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each model.types as |type|}}
+                <tr>
+                    <td>{{type.title}}</td>
+                    <td>{{type.description}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
-<form {{action "addType" on="submit"}}>
-    <label>type name:</label>
-    {{input value=type.name}}
-    <input type="submit" value="add"/>
-</form>
+    <form {{action "typeAdd" on="submit"}}>
+        <label>type name:</label>
+        {{input value=title}}
+        <label>type description:</label>
+        {{input value=description}}
+        <input type="submit" value="add"/>
+    </form>
+</div>
+
+<div class="admin-block">
+
+</div>

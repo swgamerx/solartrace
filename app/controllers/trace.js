@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
                     googleMapAddress: data.results[0],
                     lat: data.results[0].geometry.location.lat,
                     lng: data.results[0].geometry.location.lng,
-                  //  zoom: 15, // for some reason changing zoom prevents the map changing position
+                  //  zoom: 15,
                     locationSet: true
                 });
                 console.log(this.get('lat'));
@@ -51,6 +51,7 @@ export default Ember.Controller.extend({
         // Save a trace with all it's points and apply it to the business and address
         saveTrace(){
             let company = this.store.peekRecord('company',$('select[name="company"]').val());
+            let traceType = this.store.peekRecord('type',$('select[name="type"]').val());
             let location = this.get('googleMapAddress');
             let address = this.store.createRecord('address', {
                 company: company,
@@ -97,7 +98,8 @@ export default Ember.Controller.extend({
                     createdDate: new Date(),
                     active: 1,
                     pins: pins,
-                    squareMeters: squareMeters
+                    squareMeters: squareMeters,
+                    type: traceType
                 });
                 trace.save();
                 address.save();

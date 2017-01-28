@@ -1,6 +1,11 @@
 /*
 Title: Grid
-Description: Basic grid layout.
+Description: Basic grid layout. 6 col
 */
 
 .container { max-width: $grid-max-width; margin: 0 auto; }
+
+.col { float: left;
+    &-6 { width: 100%; }
+    &-3 { width: 50%; }
+}
