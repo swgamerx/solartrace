@@ -30,7 +30,6 @@ export default Ember.Controller.extend({
         },
         // Add a trace point to the map
         addPoint: function(e){
-            console.log(e);
             let location = e.latlng;
             this.get('groundPoints').pushObject({
                 lat: location.lat,
@@ -71,9 +70,22 @@ export default Ember.Controller.extend({
             let positions = [];
             let groundPoints = this.get('groundPoints');
             for(let i = 0; i < groundPoints.length; i++){
-                positions.push(new google.maps.LatLng(groundPoints[i].lat,groundPoints[i].lng));
+                positions.push([groundPoints[i].lat,groundPoints[i].lng]);
             }
-            let squareMeters = google.maps.geometry.spherical.computeArea(positions);
+            var polygon = {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [positions]
+                    }
+                    }]
+                };
+
+            var squareMeters = turf.area(polygon);
+            console.log(squareMeters);
             RSVP.all(pins.invoke('save')).then((pins) => {
                 let trace = this.store.createRecord('trace', {
                     company: company,

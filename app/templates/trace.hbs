@@ -7,15 +7,15 @@ a business then add it's address. }}
         {{/each}}
     </select>
     <div class="input-group">
-        <label>Address</label> {{input value=address type="text"}}
+        <label>Address</label> {{input name="address" value=address type="text"}}
     </div>
     <div class="input-group">
-        <label>City</label> {{input value=city type="text"}}
+        <label>City</label> {{input name="city" value=city type="text"}}
     </div>
     <div>
-        <label>State</label> {{input value=state type="text"}}
+        <label>State</label> {{input name="state" value=state type="text"}}
     </div>
-    <div class="btn" {{action "findAddress" on="click"}}>Go There</div>
+    <div class="btn find-address" {{action "findAddress" on="click"}}>Go There</div>
 </div>
 {{! Rooftop or Parking Lot Select Description: Two options that are toggled to determine if the parking lot or the roof is
 being traced by the user. }}
