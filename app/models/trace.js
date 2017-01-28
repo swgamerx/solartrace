@@ -10,5 +10,6 @@ export default DS.Model.extend({
     active: DS.attr('boolean'),
     deactivedBy: DS.belongsTo('user'),
     deactivatedDate: DS.attr('date'),
-    squareMeters: DS.attr('number')
+    squareMeters: DS.attr('number'),
+    confirmations: DS.hasMany('confirmation')
 });
