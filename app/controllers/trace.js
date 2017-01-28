@@ -4,7 +4,7 @@ import RSVP from 'rsvp';
 export default Ember.Controller.extend({
     lat: 36.174465,
     lng: -86.767960,
-    zoom: 10,
+    zoom: 14,
     groundPoints: Ember.A([]),
     roofPoints: Ember.A([]),
     groundZone: Ember.computed('groundPoints.@each.lat', 'groundPoints.@each.lng', function(){
@@ -12,20 +12,24 @@ export default Ember.Controller.extend({
     }),
     locationSet: false,
     googleMapAddress: null,
+    ajax: Ember.inject.service(),
     actions: {
         // Find the address the user submitted
         findAddress: function(){
-            let controller = this; 
+            let ajax = this.get('ajax');
             console.log('find address');
             let address = this.get('address') + ' ' + this.get('city') + ' ' + this.get('state');
-            $.ajax('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false').done(function(data){
-                console.log(data.results[0]);
-                controller.set('googleMapAddress', data.results[0]);
-                console.log(controller.get('googleMapAddress'));
-                controller.set('lat',data.results[0].geometry.location.lat);
-                controller.set('lng',data.results[0].geometry.location.lng);
-                controller.set('zoom',15);
-                controller.set('locationSet',true);
+            ajax.request('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false').then(data => {
+                console.log(data);
+                this.setProperties({
+                    googleMapAddress: data.results[0],
+                    lat: data.results[0].geometry.location.lat,
+                    lng: data.results[0].geometry.location.lng,
+                  //  zoom: 15, // for some reason changing zoom prevents the map changing position
+                    locationSet: true
+                });
+                console.log(this.get('lat'));
+                console.log(this.get('lng'));
             });
         },
         // Add a trace point to the map
