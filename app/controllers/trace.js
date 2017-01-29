@@ -13,14 +13,17 @@ export default Ember.Controller.extend({
     locationSet: false,
     googleMapAddress: null,
     ajax: Ember.inject.service(),
+    company: null,
+    newAddress: true,
+    address: null,
     actions: {
         // Find the address the user submitted
         findAddress: function(){
             let ajax = this.get('ajax');
-            console.log('find address');
             let address = this.get('address') + ' ' + this.get('city') + ' ' + this.get('state');
+            // query google's map api for the address
             ajax.request('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false').then(data => {
-                console.log(data);
+                // set the properties based on what google found
                 this.setProperties({
                     googleMapAddress: data.results[0],
                     lat: data.results[0].geometry.location.lat,
@@ -28,8 +31,18 @@ export default Ember.Controller.extend({
                   //  zoom: 15,
                     locationSet: true
                 });
-                console.log(this.get('lat'));
-                console.log(this.get('lng'));
+                // check to see if a record for this address exists already
+                this.store.findRecord('company',$('select[name="company"]').val(),{include: 'addresses'}).then((company) => {
+                    console.log(company.get('addresses'));
+                    var tempAddress = this.get('googleMapAddress').address_components[0].long_name + ' ' + this.get('googleMapAddress').address_components[1].long_name;
+                    company.get('addresses').map(function(address){
+                        if(address.address1 === tempAddress && this.get('newAddress')){
+                            console.log('address already exists');
+                            this.set('newAddress',false);
+                            this.get('address',address);
+                        }
+                    });
+                });
             });
         },
         // Add a trace point to the map
@@ -53,19 +66,26 @@ export default Ember.Controller.extend({
             let company = this.store.peekRecord('company',$('select[name="company"]').val());
             let traceType = this.store.peekRecord('type',$('select[name="type"]').val());
             let location = this.get('googleMapAddress');
-            let address = this.store.createRecord('address', {
-                company: company,
-                address1: location.address_components[0].long_name + ' ' + location.address_components[1].long_name,
-                address2: '',
-                city: location.address_components[3].long_name,
-                state: location.address_components[5].short_name,
-                zipcode: location.address_components[7].long_name,
-                longitude: location.geometry.location.lng,
-                latitude: location.geometry.location.lat,
-                addedDate: new Date()
-            });
+            // if new address is required;
+            console.log(this.get('newAddress'));
+            let address = '';
+            if(this.get('newAddress')){
+                address = this.store.createRecord('address', {
+                    company: company,
+                    address1: location.address_components[0].long_name + ' ' + location.address_components[1].long_name,
+                    address2: '',
+                    city: location.address_components[3].long_name,
+                    state: location.address_components[5].short_name,
+                    zipcode: location.address_components[7].long_name,
+                    longitude: location.geometry.location.lng,
+                    latitude: location.geometry.location.lat,
+                    addedDate: new Date()
+                });
+            } else {
+                address = this.get('address');
+            }
+            company.get('addresses').pushObject(address);
             
-
             let pins = this
             .get('groundPoints')
             .map(groundPoint => this.store.createRecord('pin', {
@@ -86,11 +106,12 @@ export default Ember.Controller.extend({
                         "type": "Polygon",
                         "coordinates": [positions]
                     }
-                    }]
-                };
-
+                }]
+            };
+            // calculate the square meters of the trace
             var squareMeters = turf.area(polygon);
-            console.log(squareMeters);
+
+            // save the pins
             RSVP.all(pins.invoke('save')).then((pins) => {
                 let trace = this.store.createRecord('trace', {
                     company: company,
@@ -102,7 +123,10 @@ export default Ember.Controller.extend({
                     type: traceType
                 });
                 trace.save();
-                address.save();
+                if(this.get('newAddress')){
+                    address.save();
+                }
+                company.save();
             });
         }
     }// end actions 
