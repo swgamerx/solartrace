@@ -35,12 +35,19 @@ export default Ember.Controller.extend({
                 this.store.findRecord('company',$('select[name="company"]').val(),{include: 'addresses'}).then((company) => {
                     console.log(company.get('addresses'));
                     var tempAddress = this.get('googleMapAddress').address_components[0].long_name + ' ' + this.get('googleMapAddress').address_components[1].long_name;
-                    company.get('addresses').map(function(address){
-                        if(address.address1 === tempAddress && this.get('newAddress')){
-                            console.log('address already exists');
-                            this.set('newAddress',false);
-                            this.get('address',address);
-                        }
+                    let addresses = company.get('addresses');
+                    addresses.forEach(function(address){
+                        this.store.peekRecord('address',address.id).then(function(address){
+                            console.log(address.toString());
+                        });
+                       // console.log(address.toString());
+                        //console.log(address.get('address1'));
+                      //  console.log(address.address1 + ' = ' + tempAddress);
+                        // if(address.address1 === tempAddress && this.get('newAddress')){
+                        //     console.log('address already exists');
+                        //     this.set('newAddress',false);
+                        //     this.get('address',address);
+                        // }
                     });
                 });
             });
