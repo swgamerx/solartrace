@@ -23,8 +23,14 @@ Router.map(function() {
 
   // Add a trace, includes finding a business location to add the trace to
   this.route('trace');
+
+  // about page
   this.route('about');
-  this.route('admin');
+
+  // Admin page
+  this.route('admin', function() {
+    this.route('company', {path: '/company/:id'});
+  });
 });
 
 export default Router;

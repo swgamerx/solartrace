@@ -1,0 +1,25 @@
+<h1>{{model.name}}</h1>
+
+<h2>Addresses</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model.addresses as |address|}}
+            <tr>
+                {{!--<td>{{address.address1}}</td>--}}
+                <td>{{address.city}}</td>
+                <td>{{address.state}}</td>
+                {{!--<td>{{address.longitude}}</td>
+                <td>{{address.latitude}}</td>--}}
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

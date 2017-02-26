@@ -1,4 +1,5 @@
 <div class="admin-block">
+    <h2>Trace Types</h2>
     <table>
         <thead>
             <tr>
@@ -26,5 +27,19 @@
 </div>
 
 <div class="admin-block">
-
+    <h2>Companies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each model.companies as |company|}}
+                <tr>
+                    <td>{{#link-to 'admin.company' company}}{{company.name}}{{/link-to}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
