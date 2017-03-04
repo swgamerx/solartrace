@@ -11,6 +11,7 @@ test('it exists', function(assert) {
 });
 
 // Try searching for the address 7044 Charlotte Pike, Nashville, TN
+/*
 test('try to find address', function(assert){
     fillIn('input[name="address"]','7044 Charlotte Pike');
     fillIn('input[name="city"]','Nashville');
@@ -18,3 +19,4 @@ test('try to find address', function(assert){
     click('.find-address');
     andThen(() => assert.equal(locationSet, true));
 });
+*/

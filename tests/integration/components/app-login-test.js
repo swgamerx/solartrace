@@ -6,19 +6,9 @@ moduleForComponent('app-login', 'Integration | Component | app login', {
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{app-login}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal('', '');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#app-login}}
-      template block text
-    {{/app-login}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
