@@ -47,7 +47,7 @@
     "ember-resolver": "^2.0.3",
     "ember-welcome-page": "^1.0.3",
     "emberfire": "2.0.6",
-    "emberfire-utils": "1.1.0",
+    "emberfire-utils": "1.2.1",
     "loader.js": "^4.0.10",
     "torii": "0.8.1",
     "watchman": "0.1.8"

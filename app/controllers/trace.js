@@ -16,12 +16,20 @@ export default Ember.Controller.extend({
     company: null,
     newAddress: true,
     address: null,
+    foundAddresses: null,
     actions: {
         // Find the address the user submitted
         findAddress: function(){
-            let ajax = this.get('ajax');
-            let address = this.get('address') + ' ' + this.get('city') + ' ' + this.get('state');
+            this.store.query('address',{
+                
+                sortBy: 'city',
+                equalTo: this.get('city'),
+            }).then((addresses) => {
+                console.log(addresses);
+                this.set('foundAddresses', addresses);
+            });
             // query google's map api for the address
+            /*
             ajax.request('http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false').then(data => {
                 // set the properties based on what google found
                 this.setProperties({
@@ -32,8 +40,9 @@ export default Ember.Controller.extend({
                     locationSet: true
                 });
                 // check to see if a record for this address exists already
-                
+
             });
+            */
         },
         // Add a trace point to the map
         addPoint: function(e){
@@ -75,7 +84,7 @@ export default Ember.Controller.extend({
                 address = this.get('address');
             }
             company.get('addresses').pushObject(address);
-            
+
             let pins = this
             .get('groundPoints')
             .map(groundPoint => this.store.createRecord('pin', {
@@ -105,7 +114,7 @@ export default Ember.Controller.extend({
             RSVP.all(pins.invoke('save')).then((pins) => {
                 let trace = this.store.createRecord('trace', {
                     company: company,
-                    address: address, 
+                    address: address,
                     createdDate: new Date(),
                     active: 1,
                     pins: pins,
@@ -119,5 +128,5 @@ export default Ember.Controller.extend({
                 company.save();
             });
         }
-    }// end actions 
+    }// end actions
 });

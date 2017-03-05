@@ -1,4 +1,4 @@
-<h1>{{model.name}}</h1>
+<h1>{{model.company.name}}</h1>
 
 <h2>Addresses</h2>
 <table>
@@ -14,11 +14,11 @@
     <tbody>
         {{#each model.addresses as |address|}}
             <tr>
-                {{!--<td>{{address.address1}}</td>--}}
+                <td>{{address.address1}}</td>
                 <td>{{address.city}}</td>
                 <td>{{address.state}}</td>
-                {{!--<td>{{address.longitude}}</td>
-                <td>{{address.latitude}}</td>--}}
+                <td>{{address.longitude}}</td>
+                <td>{{address.latitude}}</td>
             </tr>
         {{/each}}
     </tbody>

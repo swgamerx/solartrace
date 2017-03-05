@@ -1,0 +1,13 @@
+{
+    "database": {
+        "rules": "database.rules.json"
+    },
+    "hosting": {
+        "firebase": "solartrace",
+        "public": "dist",
+        "rewrites": [{
+            "source": "**",
+            "destination": "/index.html"
+        }]
+    }
+}
