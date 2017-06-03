@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "firebase": "solartrace-51fa4",
+    "public": "dist",
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
+    }]
+  }
+}
