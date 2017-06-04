@@ -8,7 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('trace', function() {
-    this.route('business', { path: '/:business_id' }, function() {
+    this.route('business', { path: '/:id' }, function() {
       this.route('address', function() {
         this.route('draw');
       });
