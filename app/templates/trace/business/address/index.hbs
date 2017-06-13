@@ -1,9 +1,0 @@
-{{#leaflet-map lat=lat lng=lng zoom=zoom onClick=(action 'addPoint')}}
-        {{google-tile-layer type="HYBRID" opacity=0.9}}
-        {{#each groundPoints as |r|}}
-            {{#marker-layer lat=r.lat lng=r.lng draggable=true onDragend=(action "updateLocation" r)}}
-            {{/marker-layer}}
-        {{/each}}
-        {{#polygon-layer locations=groundZone color="green"}}
-        {{/polygon-layer}}
-    {{/leaflet-map}}

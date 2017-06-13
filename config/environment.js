@@ -12,7 +12,10 @@ module.exports = function(environment) {
       databaseURL: 'https://solartrace-51fa4.firebaseio.com',
       storageBucket: 'solartrace-51fa4.appspot.com',
     },
-    googleLeaflet: { apiKey: 'AIzaSyCbWerkNiVcreviWE9fKSP-PQaSFw-tWY4'},
+    googleLeaflet: {
+        apiKey: 'AIzaSyCbWerkNiVcreviWE9fKSP-PQaSFw-tWY4',
+        include: false // prevent it from loading in the script automatically.
+    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

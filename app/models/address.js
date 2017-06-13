@@ -5,9 +5,10 @@ export default DS.Model.extend({
     address2: DS.attr('string'),
     city: DS.attr('string'),
     state: DS.attr('string'),
-    zip: DS.attr('string'),
+    zipcode: DS.attr('string'),
     business: DS.belongsTo('business'),
     lat: DS.attr('string'),
     lng: DS.attr('string'),
-    hex: DS.attr('string')
+    placeId: DS.attr('string'),
+    country: DS.attr('string')
 });
