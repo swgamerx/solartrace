@@ -29,9 +29,8 @@ export default Ember.Component.extend({
       console.log(results);
       let places = results.map(function(place) {
         let rObj = {};
-        rObj["lat"] = place.geometry.viewport.b.b;
-        rObj["lng"] = place.geometry.viewport.f.b;
-        rObj['location'] = [place.geometry.viewport.b.b, place.geometry.viewport.f.b];
+        rObj["lat"] = place.geometry.viewport.f.b;
+        rObj["lng"] = place.geometry.viewport.b.b;
         rObj["placeId"] = place.place_id;
         rObj["address1"] = place.formatted_address.split(",")[0];
         rObj["city"] = place.formatted_address.split(",")[1];

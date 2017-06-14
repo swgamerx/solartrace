@@ -3,7 +3,12 @@
 {{#leaflet-map lat=lat lng=lng zoom=zoom}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#each mapPoints as |point|}}
-        {{marker-layer lat=point.lat lng=point.lng draggable=true}}
+    {{#marker-layer lng=point.lng lat=point.lat}}
+        {{#popup-layer}}
+            <h3>{{point.address1}}</h3>
+            {{point.city}}, {{point.state}} {{point.zipcode}}
+        {{/popup-layer}}
+    {{/marker-layer}}
     {{/each}}
 {{/leaflet-map}}
 {{#each mapPoints as |point|}}
