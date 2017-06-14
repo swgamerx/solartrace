@@ -1,8 +1,12 @@
 <div id="map">
-    {{#leaflet-map lat=lat lng=lng zoom=zoom}}
-        {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-        {{#each mapPoints as |point|}}
-            {{marker-layer lat=point.lat lng=point.lng draggable=false}}
-        {{/each}}
-    {{/leaflet-map}}
 </div>
+{{#leaflet-map lat=lat lng=lng zoom=zoom}}
+    {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+    {{#each mapPoints as |point|}}
+        {{marker-layer lat=point.lat lng=point.lng draggable=true}}
+    {{/each}}
+{{/leaflet-map}}
+{{#each mapPoints as |point|}}
+    {{point.location}}
+    {{point.address1}}
+{{/each}}
