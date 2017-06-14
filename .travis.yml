@@ -27,4 +27,4 @@ script:
  deploy:
      provider: firebase
      token:
-         secure: '1/sGsqQWdBJMSMWxtIs2o5UzoO6bVqv6GCqvOboKrXyFs'
+         secure: 1/sGsqQWdBJMSMWxtIs2o5UzoO6bVqv6GCqvOboKrXyFs
