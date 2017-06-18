@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Component.extend({
-  businessName: null,
+  business: null,
   lat: 0,
   lng: 0,
   zoom: 12,
@@ -16,40 +16,77 @@ export default Ember.Component.extend({
       def.resolve();
     });
     $.when(def).done(() => {
-    let businessName = this.get("businessName");
-    let lat = this.get("lat");
-    let lng = this.get("lng");
-    var map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: lat, lng: lng },
-      zoom: 10
-    });
-    var service = new google.maps.places.PlacesService(map);
-
-    let callback = (results, status) => {
-      console.log(results);
-      let places = results.map(function(place) {
-        let rObj = {};
-        rObj["lat"] = place.geometry.viewport.f.b;
-        rObj["lng"] = place.geometry.viewport.b.b;
-        rObj["placeId"] = place.place_id;
-        rObj["address1"] = place.formatted_address.split(",")[0];
-        rObj["city"] = place.formatted_address.split(",")[1];
-        rObj["state"] = place.formatted_address.split(",")[2].substring(1).split(' ')[0];
-        rObj["zipcode"] = place.formatted_address.split(",")[2].substring(1).split(' ')[1];
-        rObj["country"] = place.formatted_address.split(",")[3];
-        return rObj;
+      let businessName = this.get("business").get("name");
+      let lat = this.get("lat");
+      let lng = this.get("lng");
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: lat, lng: lng },
+        zoom: 10
       });
-      this.set("mapPoints", places);
-      console.log(this.get("mapPoints"));
-    };
-    service.textSearch(
-      {
-        location: location,
-        query: [businessName]
-      },
-      callback
-    );
-    });
+      var service = new google.maps.places.PlacesService(map);
 
+      let callback = (results, status) => {
+        let places = results.map(function(place) {
+          let rObj = {};
+          rObj["lat"] = place.geometry.viewport.f.b;
+          rObj["lng"] = place.geometry.viewport.b.b;
+          rObj["placeId"] = place.place_id;
+          rObj["address1"] = place.formatted_address.split(",")[0];
+          rObj["city"] = place.formatted_address.split(",")[1];
+          rObj["state"] = place.formatted_address
+            .split(",")[2]
+            .substring(1)
+            .split(" ")[0];
+          rObj["zipcode"] = place.formatted_address
+            .split(",")[2]
+            .substring(1)
+            .split(" ")[1];
+          rObj["country"] = place.formatted_address.split(",")[3];
+          return rObj;
+        });
+        this.set("mapPoints", places);
+      };
+      service.textSearch(
+        {
+          location: location,
+          query: [businessName]
+        },
+        callback
+      );
+    });
+  },
+  store: Ember.inject.service(),
+  actions: {
+    selectLocation(address) {
+      this.get("store")
+        .query("address", {
+          orderBy: "placeId",
+          equalto: address.placeId,
+          limitToLast: 10
+        })
+        .then((addresses) => {
+          if (addresses.get("length") > 0) {
+            // If there is already a record
+          } else {
+            // there is no record found
+            var business = this.get("business");
+            let newAddress = this.get("store")
+              .createRecord("address", {
+                address1: address.address1,
+                city: address.city,
+                state: address.state,
+                zipcode: address.zipcode,
+                business: business,
+                lat: address.lat,
+                lng: address.lng,
+                placeId: address.placeId,
+                country: address.country
+            });
+            newAddress.save().then((address) => {
+                this.get('router').transitionTo("trace.business.address", address.id);
+             });
+          }
+        });
+    } // end selectLocation
   }
 });

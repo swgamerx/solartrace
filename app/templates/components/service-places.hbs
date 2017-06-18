@@ -1,5 +1,4 @@
-<div id="map">
-</div>
+<div id="map"></div>
 {{#leaflet-map lat=lat lng=lng zoom=zoom}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#each mapPoints as |point|}}
@@ -7,11 +6,8 @@
         {{#popup-layer}}
             <h3>{{point.address1}}</h3>
             {{point.city}}, {{point.state}} {{point.zipcode}}
+            {{#link-to 'trace.business.address' business=business address=point}}>Choose Location{{/link-to}}
         {{/popup-layer}}
     {{/marker-layer}}
     {{/each}}
 {{/leaflet-map}}
-{{#each mapPoints as |point|}}
-    {{point.location}}
-    {{point.address1}}
-{{/each}}

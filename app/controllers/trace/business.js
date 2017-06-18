@@ -6,11 +6,15 @@ export default Ember.Controller.extend({
     zoom: 10,
     selectedAddress: null,
     mapPoints: [],
-    actions: {
-        findPlaces(){
-
-        },
-        addAddress(model){
-        }
-    }
+    // actions: {
+    //     selectLocation(model){
+    //         let address = this.get('store').query('address', {
+    //             orderBy: 'placeId',
+    //             equalto: model.placeId,
+    //             limitToLast: 10
+    //         }).then((addresses) => {
+    //             console.log(addresses);
+    //         });
+    //     }
+    // }
 });
