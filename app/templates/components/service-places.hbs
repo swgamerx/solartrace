@@ -6,7 +6,7 @@
         {{#popup-layer}}
             <h3>{{point.address1}}</h3>
             {{point.city}}, {{point.state}} {{point.zipcode}}
-            {{#link-to 'trace.business.address' business=business address=point}}>Choose Location{{/link-to}}
+            <div class="btn" {{action selectLocation point}}> Choose Location</div>
         {{/popup-layer}}
     {{/marker-layer}}
     {{/each}}
