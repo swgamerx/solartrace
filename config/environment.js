@@ -12,9 +12,10 @@ module.exports = function(environment) {
       databaseURL: 'https://solartrace-51fa4.firebaseio.com',
       storageBucket: 'solartrace-51fa4.appspot.com',
     },
-    googleLeaflet: {
-        apiKey: 'AIzaSyCbWerkNiVcreviWE9fKSP-PQaSFw-tWY4',
-        include: false // prevent it from loading in the script automatically.
+    googleMutantLeaflet: {
+        apiKey: 'AIzaSyDJ8Hl-47JJ7ZWV7jKw0JKT52cvVFkHGcQ',
+        libraries: ['places'],
+        include: false
     },
     EmberENV: {
       FEATURES: {
@@ -41,7 +42,22 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV['ember-cli-mirage'] = {
             enabled: false
-        };
+    };
+    ENV.contentSecurityPolicy = {
+        'default-src': "'none'",
+        'script-src': "'self' 'unsafe-eval' *.googleapis.com",
+        'font-src': "'self' fonts.gstatic.com",
+        'img-src': "'self' data: *.googleapis.com maps.gstatic.com *.gstatic.com",
+        'style-src': "'self' 'unsafe-inline' *.googleapis.com"
+    };
+    ENV.MapQuestAPI = {
+        key: '6GtBBp0SAGveAAbpGNbFOvL2VL88GGMe',
+        map: 'true',        //default is 'true'
+        geocoding: 'false',  //default is 'false'
+        routing: 'false',    //default is 'false'
+        traffic: 'false',     //default is 'false'
+        version: '2.2'      //default is '2.2', this is the MapQuest API version number to use.
+    };
   }
 
   if (environment === 'test') {

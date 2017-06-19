@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
                 // If there is already a record
               } else {
                 // there is no record found
-                var business = this.get("business");
+                var business = this.get("model");
                 let newAddress = this.get("store")
                   .createRecord("address", {
                     address1: address.address1,
