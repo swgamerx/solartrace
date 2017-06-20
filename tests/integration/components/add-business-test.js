@@ -12,14 +12,8 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{add-business}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('label[for="name"]').text().trim(), 'Business Name');
+  assert.equal(this.$('label[for="logo"]').text().trim(), 'Business Logo');
+  assert.equal(this.$('label[for="description"]').text().trim(), 'Business Description');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#add-business}}
-      template block text
-    {{/add-business}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

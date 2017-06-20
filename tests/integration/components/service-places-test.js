@@ -10,16 +10,9 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{service-places}}`);
+  this.render(hbs`{{service-places lat=0 lng=0 zoom=10}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('div.leaflet-container').length, 1, 'Map container was added');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#service-places}}
-      template block text
-    {{/service-places}}
-  `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
 });

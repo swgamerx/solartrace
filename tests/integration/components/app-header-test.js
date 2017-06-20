@@ -12,14 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{app-header}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.app-header h1').text().trim(), 'Solar Trace');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#app-header}}
-      template block text
-    {{/app-header}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

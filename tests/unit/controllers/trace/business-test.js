@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('controller:trace/business', 'Unit | Controller | trace/business', {
+moduleFor('controller:trace/business/index', 'Unit | Controller | trace/business/', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
