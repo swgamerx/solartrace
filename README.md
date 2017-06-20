@@ -1,4 +1,4 @@
-# Solar Trace
+# Solar Trace [![Build Status](https://travis-ci.org/swgamerx/solartrace.svg?branch=master)](https://travis-ci.org/swgamerx/solartrace)
 
 An open community project that utilizes crowd sourcing to trace areas that a business could
 install solar panels on. Using local utility sale prices of electricity and estimated Kwh
