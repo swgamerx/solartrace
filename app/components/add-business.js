@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     store: Ember.inject.service(),
     actions: {
         addBusiness: function(){
-            let file = $('input[name="logo"]')[0].files[0];
+            let file = this.$('input[name="logo"]')[0].files[0];
             let shortName = this.get('name').toLowerCase().replace(/-/g,'_');
             this.get('firebaseUtil').uploadFile('images/businesses/'+shortName+'.png', file).then(downloadUrl => {
                 var newBusiness = this.get('store').createRecord('business', {
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
                 });
                 newBusiness.save();
             }).catch(error => {
-
+                console.log(error);
             });
         }
     }

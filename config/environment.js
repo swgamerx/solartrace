@@ -69,7 +69,12 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-  }
+
+    ENV['polyfill-io'] = {
+      features: ['navigator.geolocation']
+    };
+
+} // end test environment
 
   if (environment === 'production') {
 

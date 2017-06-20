@@ -1,4 +1,6 @@
+/*global google */
 import Ember from "ember";
+import RSVP from "rsvp";
 
 export default Ember.Component.extend({
   business: null,
@@ -6,16 +8,18 @@ export default Ember.Component.extend({
   lng: 0,
   zoom: 12,
   mapPoints: [],
+  geolocation: Ember.inject.service(),
   didInsertElement() {
-    var def = $.Deferred();
     var location;
-    navigator.geolocation.getCurrentPosition(position => {
-      this.set("lat", position.coords.latitude);
-      this.set("lng", position.coords.longitude);
-      location = { lat: this.get("lat"), lng: this.get("lng") };
-      def.resolve();
+    let promise = new RSVP.Promise(resolve => {
+      this.get("geolocation").getLocation().then(position => {
+        this.set("lat", position.coords.latitude);
+        this.set("lng", position.coords.longitude);
+        location = { lat: this.get("lat"), lng: this.get("lng") };
+        resolve();
+      });
     });
-    $.when(def).done(() => {
+    promise.then(() => {
       let businessName = this.get("business").get("name");
       let lat = this.get("lat");
       let lng = this.get("lng");
@@ -25,7 +29,7 @@ export default Ember.Component.extend({
       });
       var service = new google.maps.places.PlacesService(map);
 
-      let callback = (results, status) => {
+      let callback = results => {
         let places = results.map(function(place) {
           let rObj = {};
           rObj["lat"] = place.geometry.viewport.f.b;
