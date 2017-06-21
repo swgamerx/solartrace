@@ -1,3 +1,9 @@
-{{#leaflet-map lat=address.lat lng=address.lng zoom=18}}
+{{#leaflet-map lat=address.lat lng=address.lng zoom=18 onClick=(action addPin)}}
     {{google-mutant-layer type="hybrid"}}
+    {{#each pins as |pin|}}
+                {{#marker-layer lat=pin.lat lng=pin.lng draggable=true onDragend=(action updatePinLocation r)}}
+                {{/marker-layer}}
+            {{/each}}
+            {{#polygon-layer locations=groundZone color="green"}}
+        {{/polygon-layer}}
 {{/leaflet-map}}

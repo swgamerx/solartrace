@@ -1,2 +1,3 @@
 {{model.address1}}
-{{trace-map address=model}}
+<div class="btn" {{action 'saveTrace'}}>Save Trace</div>
+{{trace-map address=model pins=pins addPin=(action 'addPin') updatePinLocation=(action 'updatePinLocation')}}
