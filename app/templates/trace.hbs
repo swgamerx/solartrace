@@ -2,7 +2,7 @@
 <h2>Select a business</h2>
 <div>
     {{#each model as |business|}}
-        {{#link-to 'trace.business' business.id}}
+        {{#link-to 'business' business.id}}
             <div class="card-business">
                 <div class="card-business__logo">
                     <img src="{{business.logo}}" alt="{{business.name}}"/>
