@@ -4,6 +4,9 @@ import RSVP from 'rsvp';
 export default Ember.Controller.extend({
   business: null,
   address: null,
+  traces: function(){
+      
+  },
   pins: Ember.A([]),
   actions: {
     addPin: function(e) {

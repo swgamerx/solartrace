@@ -11,5 +11,5 @@ export default DS.Model.extend({
     lng: DS.attr('string'), // longitude position
     placeId: DS.attr('string'), // the id for google places api
     country: DS.attr('string'), // country
-    traces: DS.hasMany('trace') // all the traces for this address
+    traces: DS.hasMany('trace', { async: true }) // all the traces for this address
 });

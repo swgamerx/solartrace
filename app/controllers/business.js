@@ -18,8 +18,7 @@ export default Ember.Controller.extend({
           var business = this.get("model");
           if (addresses.get("length") > 0) {
             // If there is already a record
-            business.get("addresses").pushObject(addresses[0]);
-            this.transitionToRoute("trace.business.address", addresses[0]);
+            this.transitionToRoute("address", addresses.get('firstObject'));
           } else {
             // there is no record found
             let newAddress = this.get("store").createRecord("address", {
