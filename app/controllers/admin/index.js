@@ -5,6 +5,12 @@ export default Ember.Controller.extend({
     actions: {
         addBusinessForm(){
             this.set('showBusinessForm',true);
+        },
+        addTraceType(){
+            let newType = this.get('store').createRecord('traceType', {
+                name: this.get('name')
+            });
+            newType.save();
         }
     }
 });

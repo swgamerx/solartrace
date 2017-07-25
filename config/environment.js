@@ -74,6 +74,9 @@ module.exports = function(environment) {
       features: ['navigator.geolocation']
     };
 
+    ENV['ember-cli-mirage'] = {
+            enabled: true
+    };
 } // end test environment
 
   if (environment === 'production') {

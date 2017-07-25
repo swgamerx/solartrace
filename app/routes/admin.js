@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     model() {
         return RSVP.hash({
             businesses: this.get('store').findAll('business'),
+            traceTypes: this.get('store').findAll('trace-type')
         });
     }
 });

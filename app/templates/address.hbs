@@ -1,3 +1,15 @@
 {{model.address1}}
 <div class="btn" {{action 'saveTrace'}}>Save Trace</div>
-{{trace-map address=model pins=pins addPin=(action 'addPin') updatePinLocation=(action 'updatePinLocation')}}
+{{#leaflet-map lat=model.lat lng=model.lng zoom=18 onClick=(action 'addPin')}}
+    {{google-mutant-layer type="hybrid"}}
+    {{#each pins as |pin|}}
+        {{#marker-layer lat=pin.lat lng=pin.lng draggable=true onDragend=(action 'updatePinLocation' r)}}
+        {{/marker-layer}}
+    {{/each}}
+    {{#polygon-layer locations=groundZone color="green"}}
+    {{/polygon-layer}}
+    {{#each traces as |trace|}}
+        {{#polygon-layer locations=trace color="red"}}
+        {{/polygon-layer}}
+    {{/each}}
+{{/leaflet-map}}
