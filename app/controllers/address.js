@@ -4,34 +4,17 @@ import RSVP from "rsvp";
 export default Ember.Controller.extend({
   business: null,
   address: null,
-  traces: Ember.computed(function() {
-    var traceArray = Ember.A([]);
-    var promise = new RSVP.promise(function(resolve, reject) {
-      let address = this.get("model");
-      address.get("traces").then(traces => {
-        var total = traces.get("length");
-        var count = 0;
-        traces.map(trace => {
-          trace.get("pins").then(pins => {
-            let location = pins.map(pin => ({
-              lat: pin.get("lat"),
-              lng: pin.get("lng")
-            }));
-            traceArray.pushObject(location);
-            count++;
-            if (count >= total) {
-              resolve(traceArray);
-            }
-          });
-        });
+  traces: Ember.computed("model.traces.[]", function() {
+   // return this.get("model.traces").then(traces => {
+      return this.get('model.traces').map(trace => {
+        return trace.get("pins").map(pin => ({
+          lat:'8',
+          lng: '7'
+        }));
       });
-    });
-
-    return promise.then(function(traces) {
-      return traces;
-    });
+   // });
   }),
-  pins: Ember.A([]),
+  pins: [],
   groundZone: Ember.computed("pins.@each.lat", "pins.@each.lng", function() {
     return this.get("pins").map(r => ({ lat: r.lat, lng: r.lng }));
   }),
