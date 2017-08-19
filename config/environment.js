@@ -1,9 +1,10 @@
-/* jshint node: true */
+/* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'solartrace',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     firebase: {
@@ -40,24 +41,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV['ember-cli-mirage'] = {
-            enabled: false
-    };
-    ENV.contentSecurityPolicy = {
-        'default-src': "'none'",
-        'script-src': "'self' 'unsafe-eval' *.googleapis.com",
-        'font-src': "'self' fonts.gstatic.com",
-        'img-src': "'self' data: *.googleapis.com maps.gstatic.com *.gstatic.com",
-        'style-src': "'self' 'unsafe-inline' *.googleapis.com"
-    };
-    ENV.MapQuestAPI = {
-        key: '6GtBBp0SAGveAAbpGNbFOvL2VL88GGMe',
-        map: 'true',        //default is 'true'
-        geocoding: 'false',  //default is 'false'
-        routing: 'false',    //default is 'false'
-        traffic: 'false',     //default is 'false'
-        version: '2.2'      //default is '2.2', this is the MapQuest API version number to use.
-    };
   }
 
   if (environment === 'test') {
@@ -69,15 +52,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-
-    ENV['polyfill-io'] = {
-      features: ['navigator.geolocation']
-    };
-
-    ENV['ember-cli-mirage'] = {
-            enabled: true
-    };
-} // end test environment
+  }
 
   if (environment === 'production') {
 
