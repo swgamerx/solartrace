@@ -3,12 +3,14 @@
 <div>
     {{#each model as |business|}}
         {{#link-to 'business' business.id}}
-            <div class="card-business">
+            <div class="card-business card">
                 <div class="card-business__logo">
                     <img src="{{business.logo}}" alt="{{business.name}}"/>
                 </div>
-                <h2>{{business.name}} <small>added: {{moment-format business.dateAdded 'MM/DD/YYYY' 'MM-DD-YYYY'}}</small></h2>
-                <p>{{business.description}}</p>
+                <div class="card-section">
+                    <h4>{{business.name}} <small>added: {{moment-format business.dateAdded 'MM/DD/YYYY' 'MM-DD-YYYY'}}</small></h4>
+                    <p>{{business.description}}</p>
+                </div>
             </div>
         {{/link-to}}
     {{/each}}

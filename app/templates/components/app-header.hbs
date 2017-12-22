@@ -1,8 +1,14 @@
 <div class="app-header grid-x">
-    <div class="small-6 cell">
+    <div class="cell auto">
         {{#link-to 'index'}}Solar Trace{{/link-to}}
     </div>
-    <div class="small-6">
+    {{#if businessIsSelected}}
+        {{business.logo}}
+        {{business.name}}
+        {{#if addressIsSelected}}
+        {{/if}}
+    {{/if}}
+    <div class="cell auto">
         {{#link-to 'trace' class="button float-right"}}Trace{{/link-to}}
     </div>
 </div>

@@ -5,10 +5,18 @@ module.exports = {
   launch_in_ci: [
     'Chrome'
   ],
-  browser_args: {
-    'Chrome':[ '--headless', '--disable-gpu', '--remote-debugging-port=992']
-  },
   launch_in_dev: [
     'Chrome'
-  ]
+  ],
+  browser_args: {
+    Chrome: {
+      mode: 'ci',
+      args: [
+        '--disable-gpu',
+        '--headless',
+        '--remote-debugging-port=0',
+        '--window-size=1440,900'
+      ]
+    }
+  }
 };

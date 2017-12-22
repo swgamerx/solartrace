@@ -6,21 +6,7 @@ export default Ember.Controller.extend({
   address: null,
 
   // existing traces
-  traces: Ember.computed("model.traces.[]", function() {
-    // get the traces
-    return this.get("model.traces").then(trace => {
-      return trace.map(trace => {
-        return trace.get("pins").then(pins => {
-          return pins.map(pin => {
-            return {
-              lat: pin.get("lat"),
-              lng: pin.get("lng")
-            };
-          });
-        });
-      });
-    });
-  }),
+
 
   // new pins
   pins: [],
@@ -52,8 +38,15 @@ export default Ember.Controller.extend({
         })
       );
       RSVP.all(pins.invoke("save")).then(pins => {
+        let areaPins = pins.map(function(pin){
+          return [pin.get('lat'),pin.get('lng')];
+        });
+        areaPins.push(areaPins[0]);
+        let polygon = turf.polygon([areaPins]);
+        let area = turf.area(polygon);
         let trace = this.store.createRecord("trace", {
-          pins: pins
+          pins: pins, 
+          squareMeters: area
         });
         trace.save().then(trace => {
           address.get("traces").pushObject(trace);

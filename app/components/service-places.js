@@ -27,7 +27,6 @@ export default Ember.Component.extend({
         center: { lat: lat, lng: lng },
         zoom: 10
       });
-      console.log(google);
       var service = new google.maps.places.PlacesService(map);
 
       let callback = results => {
