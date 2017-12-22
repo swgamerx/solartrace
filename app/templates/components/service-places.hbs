@@ -1,5 +1,6 @@
 <div id="map"></div>
-{{#leaflet-map lat=lat lng=lng zoom=zoom}}
+<div class="layout-row">
+{{#leaflet-map lat=lat lng=lng zoom=zoom class="flex"}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#each mapPoints as |point|}}
     {{#marker-layer lng=point.lng lat=point.lat}}
@@ -11,3 +12,4 @@
     {{/marker-layer}}
     {{/each}}
 {{/leaflet-map}}
+</div>
