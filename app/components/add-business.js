@@ -15,8 +15,6 @@ export default Ember.Component.extend({
                     dateAdded: new Date()
                 });
                 newBusiness.save();
-            }).catch(error => {
-                console.log(error);
             });
         }
     }

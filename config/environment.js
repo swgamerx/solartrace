@@ -14,9 +14,8 @@ module.exports = function(environment) {
       storageBucket: 'solartrace-51fa4.appspot.com',
     },
     googleMutantLeaflet: {
-        apiKey: 'AIzaSyDJ8Hl-47JJ7ZWV7jKw0JKT52cvVFkHGcQ',
-        libraries: ['places'],
-        include: false
+        apiKey: 'AIzaSyC8ufE2ENy8aokqrNvx_Th9p9MeHw4ht9o',
+        libraries: ['places']
     },
     EmberENV: {
       FEATURES: {
@@ -41,6 +40,13 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-eval' *.googleapis.com",
+      'font-src': "'self' fonts.gstatic.com",
+      'img-src': "'self' data: *.googleapis.com maps.gstatic.com *.gstatic.com",
+      'style-src': "'self' 'unsafe-inline' *.googleapis.com"
+    }
   }
 
   if (environment === 'test') {

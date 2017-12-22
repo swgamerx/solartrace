@@ -4,16 +4,25 @@ import RSVP from "rsvp";
 export default Ember.Controller.extend({
   business: null,
   address: null,
+
+  // existing traces
   traces: Ember.computed("model.traces.[]", function() {
-   // return this.get("model.traces").then(traces => {
-      return this.get('model.traces').map(trace => {
-        return trace.get("pins").map(pin => ({
-          lat:'8',
-          lng: '7'
-        }));
+    // get the traces
+    return this.get("model.traces").then(trace => {
+      return trace.map(trace => {
+        return trace.get("pins").then(pins => {
+          return pins.map(pin => {
+            return {
+              lat: pin.get("lat"),
+              lng: pin.get("lng")
+            };
+          });
+        });
       });
-   // });
+    });
   }),
+
+  // new pins
   pins: [],
   groundZone: Ember.computed("pins.@each.lat", "pins.@each.lng", function() {
     return this.get("pins").map(r => ({ lat: r.lat, lng: r.lng }));
@@ -36,7 +45,7 @@ export default Ember.Controller.extend({
     },
     saveTrace: function() {
       const address = this.get("model");
-      let pins = this.get("pins").map(pin =>
+      var pins = this.get("pins").map(pin =>
         this.store.createRecord("pin", {
           lat: pin.lat,
           lng: pin.lng
