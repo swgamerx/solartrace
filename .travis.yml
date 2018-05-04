@@ -11,6 +11,7 @@ cache:
 
 before_install:
   - npm config set spin false
+<<<<<<< HEAD
   - npm install -g phantomjs-prebuilt
   - phantomjs --version
 
@@ -18,4 +19,9 @@ install:
   - npm install
 
 script:
+=======
+
+script:
+  - npm run lint:js
+>>>>>>> bc5cf5c... message
   - npm test
