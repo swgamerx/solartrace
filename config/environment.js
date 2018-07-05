@@ -6,16 +6,6 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
-    firebase: {
-      apiKey: 'AIzaSyBW0ksBWRxOyF5Mqp_OA4S-69JS92dg_Pw',
-      authDomain: 'solartrace-51fa4.firebaseapp.com',
-      databaseURL: 'https://solartrace-51fa4.firebaseio.com',
-      storageBucket: 'solartrace-51fa4.appspot.com',
-    },
-    googleMutantLeaflet: {
-        apiKey: 'AIzaSyC8ufE2ENy8aokqrNvx_Th9p9MeHw4ht9o',
-        apiLibraries: ['places']
-    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -39,13 +29,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.contentSecurityPolicy = {
-      'default-src': "'none'",
-      'script-src': "'self' 'unsafe-eval' *.googleapis.com",
-      'font-src': "'self' fonts.gstatic.com",
-      'img-src': "'self' data: *.googleapis.com maps.gstatic.com *.gstatic.com",
-      'style-src': "'self' 'unsafe-inline' *.googleapis.com"
-    }
   }
 
   if (environment === 'test') {
@@ -61,7 +44,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    // here you can enable a production-specific feature
   }
 
   return ENV;
