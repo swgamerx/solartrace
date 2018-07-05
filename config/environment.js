@@ -6,6 +6,16 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    firebase: {
+      apiKey: 'process.env.FIREBASE_KEY',
+      authDomain: 'solartrace-51fa4.firebaseapp.com',
+      databaseURL: 'https://solartrace-51fa4.firebaseio.com',
+      storageBucket: 'solartrace-51fa4.appspot.com',
+    },
+    googleMutantLeaflet: {
+        apiKey: 'AIzaSyC8ufE2ENy8aokqrNvx_Th9p9MeHw4ht9o',
+        apiLibraries: ['places']
+},
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
