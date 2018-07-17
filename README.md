@@ -1,7 +1,23 @@
-# solartrace
+# Solar Trace [![Build Status](https://travis-ci.org/swgamerx/solartrace.svg?branch=master)](https://travis-ci.org/swgamerx/solartrace)
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+An open community project that utilizes crowd sourcing to trace areas that a business could
+install solar panels on. Using local utility sale prices of electricity and estimated Kwh
+production we then figure out an estimate on how much money those traced areas could be
+making for their owners. All of these numbers are transparent and easily accessible to
+facilitate the public presentation of these estimates to the companies.
+
+## Questions that need answered
+It is estimated that it will take 11,200,000 Acres of land to convert just the US to solar,
+where are all of those solar panels going to go?
+
+## Goals
+
+* Produce a map of specific areas in which solar panels can be installed.
+* Present financial analytics of solar production.
+* Be a transparent source of solar energy information.
+* Generate social pressure by showing the financial and enviromental benefits of solar.
+
+#Ember Installation Guide 
 
 ## Prerequisites
 

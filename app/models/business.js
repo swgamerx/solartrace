@@ -5,5 +5,6 @@ export default DS.Model.extend({
   description: DS.attr("string"), // Description of the business
   logo: DS.attr("string"), // business's logo
   addresses: DS.hasMany("address"), // all the addresses for this business
-  dateAdded: DS.attr("date") // Date business was added
+  dateAdded: DS.attr("date"), // Date business was added
+  traces: DS.hasMany("trace") // Traces for the business
 });
