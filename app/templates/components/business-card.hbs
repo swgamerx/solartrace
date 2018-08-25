@@ -2,7 +2,8 @@
     {{#card.title as |title|}}
         {{#title.text as |text|}}
             {{#text.headline}}{{business.name}}{{/text.headline}}
-                      {{#text.subhead}}Traces: {{business.traces.length}}{{/text.subhead}}
+                {{#text.subhead}}Addresses: {{business.addresses.length}}{{/text.subhead}}
+                {{#text.subhead}}Traces: {{numberOfTraces}}{{/text.subhead}}
         {{/title.text}}
         {{title.media size='lg' src=business.logo}}
     {{/card.title}}
