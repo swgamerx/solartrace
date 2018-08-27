@@ -1,0 +1,13 @@
+<div id="map"></div>
+{{#leaflet-map lat=lat lng=lng zoom=zoom }}
+    {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+    {{#each mapPoints as |point|}}
+    {{#marker-layer lng=point.lng lat=point.lat}}
+        {{#popup-layer}}
+            <h3>{{point.address1}}</h3>
+            {{point.city}}, {{point.state}} {{point.zipcode}}
+            <div class="btn" {{action selectLocation point}}> Choose Location</div>
+        {{/popup-layer}}
+    {{/marker-layer}}
+    {{/each}}
+{{/leaflet-map}}
