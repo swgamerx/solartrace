@@ -1,0 +1,10 @@
+{{#leaflet-map class="trace-map" lat=lat lng=lng zoom=18 onClick=(action addPin)}}
+    {{google-mutant-layer type="hybrid"}}
+    {{#each pins as |pin|}}
+        {{marker-layer lat=pin.lat lng=pin.lng draggable=true onDragend=(action 'updatePinLocation' r)}}
+    {{/each}}
+    {{polygon-layer locations=groundZone color="green"}}
+    {{#each traces as |trace|}}
+        {{polygon-layer locations=trace color="red"}}
+    {{/each}}
+{{/leaflet-map}}

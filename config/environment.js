@@ -7,13 +7,13 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     firebase: {
-      apiKey: 'process.env.FIREBASE_KEY',
+      apiKey: process.env.FIREBASE_KEY,
       authDomain: 'solartrace-51fa4.firebaseapp.com',
       databaseURL: 'https://solartrace-51fa4.firebaseio.com',
       storageBucket: 'solartrace-51fa4.appspot.com',
     },
     googleMutantLeaflet: {
-        apiKey: 'AIzaSyC8ufE2ENy8aokqrNvx_Th9p9MeHw4ht9o',
+        apiKey: process.env.MAP_KEY,
         apiLibraries: ['places']
 },
     EmberENV: {

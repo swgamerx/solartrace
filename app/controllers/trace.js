@@ -1,13 +1,34 @@
 import Controller from "@ember/controller";
 import Ember from "ember";
+import { computed, get, setProperties } from "@ember/object";
 
 export default Controller.extend({
-  lat: 0,
-  lng: 0,
-  zoom: 10,
-  selectedAddress: null,
-  mapPoints: [],
-  geolocation: Ember.inject.service(),
+  init() {
+    get(this, "geolocation")
+      .getLocation()
+      .then(position => {
+        setProperties(this, {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+      });
+  },
+  queryParams: ["business", "address"],
+  lat: 0, // latitude map position
+  lng: 0, // longitude map position
+  zoom: 10, // map zoom level
+  selectedAddress: null, // address selected to trace
+  // IF a address is selected, used for determining what to show
+  hasSelectedAddress: computed("selectedAddress", function() {
+    return selectedAddress ? true : false;
+  }),
+  pins: [],
+  groundZone: [],
+  mapPoints: [], // points of trace
+  geolocation: Ember.inject.service(), // geolocation to find user's position
+  /**
+   * Used by google maps for searching for businesses based on geolcation
+   */
   didInsertElement() {
     var location;
     let promise = new RSVP.Promise(resolve => {
@@ -94,6 +115,39 @@ export default Controller.extend({
             });
           }
         });
-    } // end selectLocation
+    }, // end selectLocation
+    addPin: function(e) {
+      let location = e.latlng;
+      this.get("pins").pushObject({
+        lat: location.lat,
+        lng: location.lng
+      });
+    },
+    // User has moved around the map
+    updatePinLocation(r, e) {
+      let location = e.target.getLatLng();
+      Ember.setProperties(r, {
+        lat: location.lat,
+        lng: location.lng
+      });
+    },
+    saveTrace: function() {
+      const address = this.get("model");
+      var pins = this.get("pins").map(pin =>
+        this.store.createRecord("pin", {
+          lat: pin.lat,
+          lng: pin.lng
+        })
+      );
+      RSVP.all(pins.invoke("save")).then(pins => {
+        let trace = this.store.createRecord("trace", {
+          pins: pins
+        });
+        trace.save().then(trace => {
+          address.get("traces").pushObject(trace);
+          address.save();
+        });
+      });
+    }
   }
 });
