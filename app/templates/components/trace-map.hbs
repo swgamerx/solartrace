@@ -1,4 +1,5 @@
-{{#leaflet-map class="trace-map" lat=lat lng=lng zoom=18 onClick=(action addPin)}}
+<div id="map"></div>
+{{#leaflet-map class="trace-map" lat=lat lng=lng zoom=zoom onClick=(action addPin)}}
     {{google-mutant-layer type="hybrid"}}
     {{#each pins as |pin|}}
         {{marker-layer lat=pin.lat lng=pin.lng draggable=true onDragend=(action 'updatePinLocation' r)}}
@@ -7,4 +8,18 @@
     {{#each traces as |trace|}}
         {{polygon-layer locations=trace color="red"}}
     {{/each}}
+
+    {{! If set to show addresses, then show all matches}}
+    {{#if showAddresses}}
+        {{#each addresses as |address|}}
+            {{#marker-layer lng=address.lng lat=address.lat}}
+                {{#popup-layer}}
+                    <h3>{{address.address1}}</h3>
+                    {{address.city}}, {{address.state}} {{address.zipcode}}
+                    <div class="btn"> Choose Location</div>
+                {{/popup-layer}}
+            {{/marker-layer}}
+        {{/each}}
+    {{/if}}
+
 {{/leaflet-map}}

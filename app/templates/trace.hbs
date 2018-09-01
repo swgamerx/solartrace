@@ -1,4 +1,12 @@
 {{outlet}}
 {{model.address1}}
 <div class="btn" {{action 'saveTrace'}}>Save Trace</div>
-{{trace-map lat=lat lng=lng zoom=18 groundZone=groundZone pins=pins addPin=(action 'addPin')}}
+{{trace-map 
+    lat=lat 
+    lng=lng 
+    zoom=zoom
+    groundZone=groundZone 
+    pins=pins 
+    showAddresses=showAddresses
+    addresses=businessAddresses 
+    addPin=(action 'addPin')}}

@@ -14,7 +14,7 @@ module.exports = function(environment) {
     },
     googleMutantLeaflet: {
         apiKey: process.env.MAP_KEY,
-        apiLibraries: ['places']
+        libraries: ['places']
 },
     EmberENV: {
       FEATURES: {
