@@ -1,11 +1,11 @@
 import Controller from "@ember/controller";
 import Ember from "ember";
 import { computed, get, setProperties, set } from "@ember/object";
-import store from "ember-data/store";
 import { schedule } from "@ember/runloop";
 
 export default Controller.extend({
   init() {
+    this._super();
     // Get the user's geolocation and set the lat and lng properties
     get(this, "geolocation")
       .getLocation()
@@ -33,15 +33,15 @@ export default Controller.extend({
     let lat = get(this, "lat"); // user's lat
     let lng = get(this, "lng"); // user's lng
     /**
-     * Wait until leaflet has been rendered otherwise google maps functions will begin 
+     * Wait until leaflet has been rendered otherwise google maps functions will begin
      * to fail due to the map container lacking a width & height as well as the geolocations
-     * being unknown. If this is not functioning properly google will will report the error 
+     * being unknown. If this is not functioning properly google will will report the error
      * a is null
-     * Which means it could not perform it's operations due to the map. 
+     * Which means it could not perform it's operations due to the map.
      */
     schedule("afterRender", () => {
       if (lat != 0 && lng != 0) {
-        let location = new google.maps.LatLng(lat, lng); // Google generated location 
+        let location = new google.maps.LatLng(lat, lng); // Google generated location
         // Inform google which div is the map wrapper.
         var map = new google.maps.Map(document.getElementById("map"), {
           center: location,
@@ -60,8 +60,8 @@ export default Controller.extend({
       }
     });
     /**
-     * Take the response from google and format it into a usable array 
-     * @param {object} results 
+     * Take the response from google and format it into a usable array
+     * @param {object} results
      */
     let callback = results => {
       let places = results.map(function(place, index) {
@@ -96,9 +96,9 @@ export default Controller.extend({
     selectLocation(address) {
       console.log(address);
       this.setProperties({
-        showAddresses: false, 
+        showAddresses: false,
         zoom: 20,
-        lat: address.lat, 
+        lat: address.lat,
         lng: address.lng
       });
       let businessAddresses = get(this, 'businessAddresses');
@@ -119,7 +119,7 @@ export default Controller.extend({
       newAddress.save().then(address => {
         business.get("addresses").pushObject(address);
         business.save().then(() => {
-         
+
         });
       });
     }, // end selectLocation
