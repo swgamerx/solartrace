@@ -1,12 +1,17 @@
 import Component from "@ember/component";
+import { inject } from "@ember/service";
+import RSVP from "rsvp";
 
 export default Component.extend({
+  init() {
+    this._super();
+    this.mapPoints = [];
+  },
   business: null,
   lat: 0,
   lng: 0,
   zoom: 12,
-  mapPoints: [],
-  geolocation: Ember.inject.service(),
+  geolocation: inject(),
   didInsertElement() {
     var location;
     let promise = new RSVP.Promise(resolve => {

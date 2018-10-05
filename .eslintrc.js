@@ -1,5 +1,8 @@
 module.exports = {
   root: true,
+  globals: {
+    "google": true
+  },
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module'
