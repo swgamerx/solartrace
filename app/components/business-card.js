@@ -7,7 +7,7 @@ export default Component.extend({
     if (get(this, "model.addresses")) {
       let addresses = get(this, "model.addresses");
       for (let i = 0; i < addresses.length; i++) {
-        counted += addresses[i].length;
+        count += addresses[i].length;
       }
     }
     return count;
