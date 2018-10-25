@@ -1,21 +1,22 @@
 import Component from "@ember/component";
-import { inject } from "@ember/service";
+import { inject as service } from "@ember/service";
 import RSVP from "rsvp";
+import { get, set } from "@ember/object";
 
 export default Component.extend({
   init() {
     this._super();
-    this.mapPoints = [];
+    this.addresses = [];
   },
   business: null,
   lat: 0,
   lng: 0,
   zoom: 12,
-  geolocation: inject(),
+  geolocation: service(),
   didInsertElement() {
-    var location;
+    let location;
     let promise = new RSVP.Promise(resolve => {
-      this.get("geolocation")
+      get(this, "geolocation")
         .getLocation()
         .then(position => {
           this.set("lat", position.coords.latitude);
@@ -37,8 +38,8 @@ export default Component.extend({
       let callback = results => {
         let places = results.map(function(place) {
           let rObj = {};
-          rObj["lat"] = place.geometry.viewport.f.b;
-          rObj["lng"] = place.geometry.viewport.b.b;
+          rObj["lat"] = place.geometry.location.lat();
+          rObj["lng"] = place.geometry.location.lng();
           rObj["placeId"] = place.place_id;
           rObj["address1"] = place.formatted_address.split(",")[0];
           rObj["city"] = place.formatted_address.split(",")[1];
@@ -53,7 +54,7 @@ export default Component.extend({
           rObj["country"] = place.formatted_address.split(",")[3];
           return rObj;
         });
-        this.set("mapPoints", places);
+        set(this, "addresses", places);
       };
       service.textSearch(
         {

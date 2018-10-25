@@ -2,7 +2,7 @@ import Controller from "@ember/controller";
 //import Ember from "ember";
 import { computed, get, setProperties /*, set */ } from "@ember/object";
 import RSVP from "rsvp";
-import { inject } from "@ember/service";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
   init() {
@@ -20,7 +20,7 @@ export default Controller.extend({
     this.groundZone = [];
     this.mapPoints = []; // points of trace
   },
-  geolocation: inject.service(),
+  geolocation: service(),
   queryParams: ["business", "address"],
   business: null, // business id
   lat: 0, // latitude map position
@@ -31,18 +31,17 @@ export default Controller.extend({
   hasSelectedAddress: computed("selectedAddress", function() {
     return get(this, "selectedAddress") ? true : false;
   }),
-  showAddresses: false, // should addresses show, toggled when businesses are found
+  showAddresses: true, // should addresses show, toggled when businesses are found
   actions: {
     selectLocation(address) {
-      console.log(address);
+      console.log(address.lat);
+      console.log(address.lng);
       this.setProperties({
         showAddresses: false,
-        zoom: 20,
+        zoom: 18,
         lat: address.lat,
         lng: address.lng
       });
-      let businessAddresses = get(this, "businessAddresses");
-      address = businessAddresses[address];
       let business = get(this, "model.business");
       let newAddress = this.get("store").createRecord("address", {
         address1: address.address1,

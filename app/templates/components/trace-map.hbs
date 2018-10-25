@@ -11,6 +11,7 @@
 
     {{! If set to show addresses, then show all matches}}
     {{#if showAddresses}}
+        {{#business-address-search business=model.business as |addresses|}}
         {{#each addresses as |address|}}
             {{#marker-layer lng=address.lng lat=address.lat}}
                 {{#popup-layer}}
@@ -21,6 +22,7 @@
                 {{/popup-layer}}
             {{/marker-layer}}
         {{/each}}
+        {{/business-address-search}}
     {{/if}}
 
 {{/leaflet-map}}

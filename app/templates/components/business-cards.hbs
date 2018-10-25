@@ -1,5 +1,6 @@
 <div class="layout-row layout-xs-column">
     {{#each businesses as |business|}}
+        {{log business.id}}
         <div class="layout-column flex-xs flex-gt-xs-50">
             {{business-card business=business}}
         </div>
